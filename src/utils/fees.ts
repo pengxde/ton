@@ -59,7 +59,7 @@ export function computeGasPrices(gasUsed: bigint, prices: { flatLimit: bigint, f
         return prices.flatPrice;
     } else {
         //  td::rshift(gas_price256 * (gas_used - cfg.flat_gas_limit), 16, 1) + cfg.flat_gas_price
-        return prices.flatPrice + ((prices.price * (gasUsed - prices.flatLimit)) >> 16n);
+        return prices.flatPrice + ((prices.price * (gasUsed - prices.flatLimit)) >> BigInt(16));
     }
 }
 
@@ -104,7 +104,7 @@ export function computeMessageForwardFees(msgPrices: MsgPrices, cell: Cell) {
     // NOTE: Extra currencies are ignored for now
 
     let fees = computeFwdFees(msgPrices, BigInt(storageStats.cells), BigInt(storageStats.bits));
-    let res = (fees * BigInt(msgPrices.firstFrac)) >> 16n;
+    let res = (fees * BigInt(msgPrices.firstFrac)) >> BigInt(16);
     let remaining = fees - res;
     return { fees: res, remaining };
 }
@@ -123,8 +123,8 @@ function collectCellStats(cell: Cell): { bits: number, cells: number } {
 function shr16ceil(src: bigint) {
     let rem = src % 65536n;
     let res = src >> 16n;
-    if (rem !== 0n) {
-        res += 1n;
+    if (rem !== BigInt(0)) {
+        res += BigInt(1);
     }
     return res;
 }
