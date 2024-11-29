@@ -224,7 +224,7 @@ export function configParse8(slice: Slice | null | undefined) {
     if (!slice) {
         return {
             version: 0,
-            capabilities: 0n
+            capabilities: BigInt(0)
         }
     }
 
