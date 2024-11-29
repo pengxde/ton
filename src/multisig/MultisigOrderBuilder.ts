@@ -10,7 +10,7 @@ import { MultisigOrder } from './MultisigOrder';
 
 export class MultisigOrderBuilder {
     public messages: Builder = beginCell();
-    public queryId: bigint = 0n;
+    public queryId: bigint = BigInt(0);
     private walletId: number;
     private queryOffset: number;
 
@@ -46,6 +46,6 @@ export class MultisigOrderBuilder {
 
     private updateQueryId() {
         const time = BigInt(Math.floor(Date.now() / 1000 + this.queryOffset));
-        this.queryId = time << 32n;
+        this.queryId = time << BigInt(32);
     }
 }
