@@ -127,7 +127,7 @@ export class MultisigWallet {
         await provider.external(Cell.EMPTY);
     }
 
-    public async deployInternal(sender: Sender, value: bigint = 1000000000n) {
+    public async deployInternal(sender: Sender, value: bigint = BigInt(1000000000)) {
         await sender.send({
             sendMode: SendMode.PAY_GAS_SEPARATELY + SendMode.IGNORE_ERRORS,
             to: this.address,
